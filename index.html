@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Chess API by zeppelinnn</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Chess API</h1>
+        <h2></h2>
+
+        <section id="downloads">
+          <a href="https://github.com/zeppelinnn" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="baseh" class="anchor" href="#baseh" aria-hidden="true"><span class="octicon octicon-link"></span></a>Base.h</h1>
+
+<h2>
+<a id="color" class="anchor" href="#color" aria-hidden="true"><span class="octicon octicon-link"></span></a>Color</h2>
+
+<blockquote>
+<p>Color opposite(Color c)  </p>
+</blockquote>
+
+<p>Return the opposite color.</p>
+
+<h2>
+<a id="piece" class="anchor" href="#piece" aria-hidden="true"><span class="octicon octicon-link"></span></a>Piece</h2>
+
+<blockquote>
+<p>char letter(Piece p)</p>
+</blockquote>
+
+<p>Return space (empty) or one of PNBRQK.</p>
+
+<h2>
+<a id="square" class="anchor" href="#square" aria-hidden="true"><span class="octicon octicon-link"></span></a>Square</h2>
+
+<blockquote>
+<p>Square toSquare(File f, Rank r)</p>
+</blockquote>
+
+<p>Return Square of file f and rank r.</p>
+
+<blockquote>
+<p>File getFile(Square s)<br>
+Rank getRank(Square s)<br>
+int fileDist(Square s1, s2)<br>
+int rankDist(Square s1, s2)<br>
+int dist(Square s1, s2)  </p>
+</blockquote>
+
+<p>Return the file, rank, and max of (file,rank) distance between squares s1 and s2..</p>
+
+<h2>
+<a id="score" class="anchor" href="#score" aria-hidden="true"><span class="octicon octicon-link"></span></a>Score</h2>
+
+<blockquote>
+<p>enum
+  minScore = -131072<br>
+  draw = 0<br>
+  pawnValue = 1000<br>
+  mate = 130000<br>
+  illegal = 130100<br>
+  maxScore = +131072  </p>
+</blockquote>
+
+<h1>
+<a id="bitboardh" class="anchor" href="#bitboardh" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bitboard.h</h1>
+
+<blockquote>
+<p>Bitboard b  &amp;,|,^,~,&lt;&lt;,&gt;&gt;, ==<br>
+b &amp;= someBB<br>
+b = b &amp; someBB  </p>
+
+<p>Square firstBit(Bitboard b)</p>
+</blockquote>
+
+<p>Returns the first 'on' bit in the Bitboard. Used repeatedly to find all the 'on' bits i.e. to locate pieces of type X on bitboard for pieces of type X.</p>
+
+<blockquote>
+<p>int popCount(Bitboard b)</p>
+</blockquote>
+
+<p>Returns the number of 'on' bits in the Bitboard i.e. number of pieces of type X</p>
+
+<blockquote>
+<p>void clear(Bitboard&amp; b, Square s)<br>
+void set(Bitboard&amp; b, Square s)</p>
+</blockquote>
+
+<p>Clear/set square S on bitboard b.</p>
+
+<h1>
+<a id="evaluateh" class="anchor" href="#evaluateh" aria-hidden="true"><span class="octicon octicon-link"></span></a>evaluate.h</h1>
+
+<blockquote>
+<p>Score evaluate(const Position&amp; pos);</p>
+</blockquote>
+
+<p>Return a score for the position including material and piece positions.</p>
+
+<h1>
+<a id="moveh" class="anchor" href="#moveh" aria-hidden="true"><span class="octicon octicon-link"></span></a>Move.h</h1>
+
+<h2>
+<a id="move-class-methods" class="anchor" href="#move-class-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Move class methods</h2>
+
+<blockquote>
+<p>Square from()<br>
+Square to()<br>
+Piece piece()<br>
+Piece capture()<br>
+Piece promote()  </p>
+</blockquote>
+
+<p>Return data associated with the Move.</p>
+
+<h1>
+<a id="movesh" class="anchor" href="#movesh" aria-hidden="true"><span class="octicon octicon-link"></span></a>Moves.h</h1>
+
+<blockquote>
+<p>void generateMoves(const Position&amp; pos, Moves&amp; moves);</p>
+</blockquote>
+
+<p>Save generated moves into moves. Includes illegal moves.</p>
+
+<blockquote>
+<p>void generateNonQuietMoves(const Position&amp; pos, Moves&amp; moves);</p>
+</blockquote>
+
+<p>Save generated moves into moves. Includes only captures. (Could be illegal still)</p>
+
+<blockquote>
+<p>Square rotate45Left(Square s);<br>
+Square rotate45Right(Square s);<br>
+Square rotate90Left(Square s);  </p>
+</blockquote>
+
+<p>Rotate a square to match a rotated bitboard.</p>
+
+<blockquote>
+<p>bool isAttacking(Color color, Square s, const Position&amp; pos);</p>
+</blockquote>
+
+<p>Return true if Color color is attacking square S in position pos.</p>
+
+<blockquote>
+<p>Score SEE(const Position &amp;pos, Move move);</p>
+</blockquote>
+
+<p>Return a score based on the result of move in terms of captures &amp; exchanges</p>
+
+<h1>
+<a id="positionh" class="anchor" href="#positionh" aria-hidden="true"><span class="octicon octicon-link"></span></a>Position.h</h1>
+
+<h2>
+<a id="position-class-methods" class="anchor" href="#position-class-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Position class methods</h2>
+
+<blockquote>
+<p>void makeMove(Move m);<br>
+void unMakeMove(Move m);<br>
+void makeNullMove();<br>
+void unMakeNullMove();  </p>
+</blockquote>
+
+<p>Make/unmake a move (or null move for optimizations)</p>
+
+<blockquote>
+<p>void setupFEN(std::string FEN);<br>
+std::string getFEN() const;</p>
+</blockquote>
+
+<p>Set and return string representations of the board.</p>
+
+<blockquote>
+<p>ColoredPiece position[square s] </p>
+</blockquote>
+
+<p>Returns the piece and square s</p>
+
+<blockquote>
+<p>BitBoard bitboard(Color c, Piece p) const<br>
+BitBoard occupied(Color c) const<br>
+BitBoard occupied() const<br>
+BitBoard nonOccupied() const<br>
+BitBoard occupiedRotate45Left() const<br>
+BitBoard occupiedRotate45Right() const<br>
+BitBoard occupiedRotate90Left() const  </p>
+</blockquote>
+
+<p>Return various bitboards of certain colors/pieces or rotated/occupied versions.</p>
+
+<blockquote>
+<p>Color turn()<br>
+Square epSquare()<br>
+CastlingRight castlingRight(Color c)<br>
+Score material(Color c)<br>
+bool inCheck(Color color, const Position&amp; pos)  </p>
+</blockquote>
+
+<p>Return game details such as color, en passant square, castling rights.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
